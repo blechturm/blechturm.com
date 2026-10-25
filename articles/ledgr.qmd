@@ -1,0 +1,18 @@
+---
+title: "ledgr articles"
+toc: false
+listing:
+  contents: "*/index.qmd"
+  include:
+    categories: "ledgr"
+  type: default
+  sort: "date desc"
+  date-format: iso
+  fields: [date, title, description]
+  feed:
+    title: "blechturm — ledgr"
+    type: full
+    items: 50
+---
+
+[All articles](index.qmd) · [Subscribe to this category](ledgr.xml).

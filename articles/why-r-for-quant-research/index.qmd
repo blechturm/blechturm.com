@@ -1,0 +1,7 @@
+---
+title: "Why R for quantitative research"
+categories: [R, quant-finance]
+draft: true
+---
+
+TODO: Discuss the reasons for choosing R for quantitative research.

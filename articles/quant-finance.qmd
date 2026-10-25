@@ -1,0 +1,18 @@
+---
+title: "quant-finance articles"
+toc: false
+listing:
+  contents: "*/index.qmd"
+  include:
+    categories: "quant-finance"
+  type: default
+  sort: "date desc"
+  date-format: iso
+  fields: [date, title, description]
+  feed:
+    title: "blechturm — quant-finance"
+    type: full
+    items: 50
+---
+
+[All articles](index.qmd) · [Subscribe to this category](quant-finance.xml).

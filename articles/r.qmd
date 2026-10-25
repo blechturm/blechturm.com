@@ -1,0 +1,18 @@
+---
+title: "R articles"
+toc: false
+listing:
+  contents: "*/index.qmd"
+  include:
+    categories: "R"
+  type: default
+  sort: "date desc"
+  date-format: iso
+  fields: [date, title, description]
+  feed:
+    title: "blechturm — R"
+    type: full
+    items: 50
+---
+
+[All articles](index.qmd) · [Subscribe to this category](r.xml).

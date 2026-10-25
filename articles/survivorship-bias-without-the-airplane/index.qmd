@@ -1,0 +1,8 @@
+---
+title: "Survivorship bias without the airplane"
+categories: [statistics, quant-finance]
+draft: true
+---
+
+TODO: Explain survivorship bias in quantitative research without relying on
+the familiar airplane example.

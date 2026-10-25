@@ -1,0 +1,8 @@
+---
+title: "crypto2, ledgr, and survivorship"
+categories: [R, ledgr, quant-finance]
+draft: true
+---
+
+TODO: Explore survivorship considerations in a quantitative research workflow
+using crypto2 and ledgr.

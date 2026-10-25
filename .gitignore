@@ -1,0 +1,15 @@
+/_site/
+/.quarto/
+**/*_cache/
+**/*_files/
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.DS_Store
+Thumbs.db
+
+**/*.quarto_ipynb
+
+# Quarto rebuilds its bundled HTML dependency cache.
+/_freeze/site_libs/

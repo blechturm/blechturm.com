@@ -1,0 +1,51 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - CNAME
+
+website:
+  title: "blechturm"
+  site-url: https://blechturm.com
+  description: "Max Thomasberger's technical publishing site: quantitative research, R, backtesting, statistics, data science, and software engineering."
+  draft-mode: gone
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: articles/index.qmd
+        text: Articles
+      - href: projects.qmd
+        text: Projects
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/blechturm
+        aria-label: GitHub
+      - icon: rss
+        href: /articles/index.xml
+        aria-label: RSS feed
+  page-footer:
+    left: "Max Thomasberger · blechturm"
+    right:
+      - text: RSS
+        href: /articles/index.xml
+
+format:
+  html:
+    theme:
+      light: default
+      dark: darkly
+    css: styles.css
+    code-copy: true
+    highlight-style: arrow
+    toc: false
+
+execute:
+  freeze: auto
+  error: false
+
+bibliography: references.bib
+link-citations: true
+lang: en

@@ -1,0 +1,13 @@
+---
+title: "blechturm"
+---
+
+This is Max Thomasberger's technical publishing site, covering quantitative
+research, R, backtesting, statistics, data science, and software engineering.
+
+[Articles](articles/index.qmd) are the main publication stream.
+[Projects](projects.qmd) collects related software, including ledgr, an
+open-source R backtesting and quantitative research framework.
+
+[GitHub](https://github.com/blechturm) ·
+[ledgr documentation](https://blechturm.github.io/ledgr/)

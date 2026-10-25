@@ -1,0 +1,20 @@
+---
+title: "Articles"
+description: "Long-form technical writing from blechturm."
+listing:
+  contents: "*/index.qmd"
+  type: default
+  sort: "date desc"
+  categories: true
+  fields: [date, title, description]
+  date-format: iso
+  feed:
+    title: "blechturm — Articles"
+    description: "Quantitative research, R, backtesting, statistics, data science, and software engineering."
+    type: full
+    items: 50
+---
+
+Articles will appear here as they are published.
+
+[Subscribe via RSS](index.xml). Category feeds: [R](r.xml), [ledgr](ledgr.xml), [quant-finance](quant-finance.xml).

@@ -1,0 +1,29 @@
+/* Keep Quarto's responsive layout and theme colors; emphasize reading. */
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar, .nav-footer, #TOC, .quarto-listing,
+.quarto-title-meta, .quarto-categories {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+p a, li a {
+  text-underline-offset: 0.16em;
+}
+
+pre, code {
+  font-size: 0.9em;
+}
+
+main {
+  padding-bottom: 3rem;
+}
