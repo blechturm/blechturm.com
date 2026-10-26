@@ -1,5 +1,6 @@
 ---
 title: "Lorem ipsum: a Quarto field notebook"
+author: Max Thomasberger
 subtitle: "An executable R publishing showcase"
 description: "A public design showcase for typography, executable R, figures, citations, and interactive charts."
 date: "2026-10-26"
@@ -15,11 +16,6 @@ format:
     toc: true
     toc-depth: 2
     toc-location: body
-    grid:
-      body-width: 720px
-      margin-width: 260px
-      sidebar-width: 160px
-      gutter-width: 1.5rem
     mermaid:
       theme: neutral
     code-fold: true

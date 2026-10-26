@@ -31,14 +31,14 @@ site to _site/; drafts are blank and omitted from listings, search, sitemap,
 and feeds. _site/ and .quarto/ are ignored by Git.
 
 Create `articles/<slug>/index.qmd`, using an existing draft as a starting
-point. Give it a title, a real publication date (date: YYYY-MM-DD),
+point. Give it a title, an author, a real publication date (date: YYYY-MM-DD),
 categories (use R, ledgr, and quant-finance consistently), and optionally
 a description. Keep draft: true until publication. URLs are
 `https://blechturm.com/articles/<slug>/`.
 
 R chunks use the usual fenced {r} syntax. Quarto handles syntax highlighting,
-copy buttons, figures, tables, and cross-references. Article pages inherit a
-table of contents; set toc: false in a short article to disable it.
+copy buttons, figures, tables, and cross-references. Set author and toc in each article's front matter; use toc: false for a short
+article. Index pages keep a plain title without article metadata.
 Add real entries to references.bib and cite them with [@key].
 The bibliography is deliberately empty initially.
 
@@ -171,3 +171,7 @@ The showcase opts into a Tufte-inspired article layout with margin references
 and an in-article contents list. Navigation and listing pages retain their
 existing layout. Explicitly rerender articles after changing shared R helpers:
 freeze does not track those helper files automatically.
+
+Navigation pages share the site grid and use inline article category links.
+Author and contents metadata belongs to individual articles. The small
+navigation include keeps Articles active on its category and article pages.

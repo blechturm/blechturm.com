@@ -1,11 +1,10 @@
 ---
 title: "Articles"
-description: "Long-form technical writing from blechturm."
 listing:
   contents: "*/index.qmd"
   type: default
   sort: "date desc"
-  categories: true
+  categories: false
   fields: [date, title, description]
   date-format: iso
   feed:
@@ -15,6 +14,5 @@ listing:
     items: 50
 ---
 
-Technical articles and publishing experiments, newest first.
-
-[Subscribe via RSS](index.xml). Category feeds: [R](r.xml), [ledgr](ledgr.xml), [quant-finance](quant-finance.xml).
+Browse [all articles](index.qmd), [R](r.qmd), [ledgr](ledgr.qmd), or
+[quant finance](quant-finance.qmd). [RSS](index.xml).

@@ -1,18 +1,25 @@
+:root {
+  --publication-text: 1.0625rem;
+  --publication-small: 0.875rem;
+  --publication-title: clamp(2rem, 4vw, 2.5rem);
+  --publication-section: 1.5rem;
+  scrollbar-gutter: stable;
+}
 /* Keep Quarto's responsive layout and theme colors; emphasize reading. */
 body {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.06rem;
+  font-size: var(--publication-text);
   line-height: 1.7;
 }
 
-h1, h2, h3, h4, h5, h6,
 .navbar, .nav-footer, #TOC, .quarto-listing,
 .quarto-title-meta, .quarto-categories {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-h1, h2, h3 {
-  font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
   line-height: 1.25;
 }
 
@@ -68,7 +75,7 @@ body {
 }
 
 h1 {
-  font-size: clamp(2.3rem, 5vw, 3.6rem);
+  font-size: var(--publication-title);
   letter-spacing: -0.04em;
 }
 
@@ -253,19 +260,19 @@ body.article-tufte main h4 {
 }
 
 body.article-tufte main h1 {
-  font-size: clamp(2.1rem, 4.5vw, 3.1rem);
+  font-size: var(--publication-title);
   letter-spacing: -0.025em;
   line-height: 1.15;
 }
 
 body.article-tufte main h2 {
-  font-size: 1.8rem;
+  font-size: var(--publication-section);
   border-bottom: 0;
   margin-top: 2.5rem;
 }
 
 body.article-tufte main h3 {
-  font-size: 1.3rem;
+  font-size: var(--publication-text);
   font-style: italic;
 }
 
@@ -277,12 +284,12 @@ body.article-tufte #TOC {
   margin-block: 1.5rem 2.5rem;
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--publication-rule);
-  font-size: 0.9rem;
+  font-size: var(--publication-small);
 }
 
 body.article-tufte .column-margin {
   color: var(--publication-muted);
-  font-size: 0.9rem;
+  font-size: var(--publication-small);
   line-height: 1.5;
 }
 
@@ -300,7 +307,7 @@ body.quarto-dark .plot-light {
   flex-wrap: wrap;
   gap: 0.75rem 1.5rem;
   font-family: system-ui, sans-serif;
-  font-size: 0.9rem;
+  font-size: var(--publication-small);
 }
 
 .palette-key span::before {
@@ -351,4 +358,99 @@ body .plotly-notifier .notifier-note {
 
 body .plotly-notifier .notifier-close {
   color: var(--publication-ink);
+}
+
+/* Keep the reading column and site header stable between navigation pages. */
+body.fullcontent main.content {
+  width: 100%;
+  max-width: 720px;
+  justify-self: start;
+}
+
+.navbar .navbar-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+main h2 {
+  font-size: var(--publication-section);
+  border-bottom: 0;
+}
+
+main h3,
+main h4,
+main h5,
+main h6 {
+  font-size: var(--publication-text);
+}
+
+.quarto-title .subtitle,
+.navbar,
+.quarto-listing,
+#TOC {
+  font-size: var(--publication-text);
+}
+
+.quarto-title-meta,
+.quarto-title-meta p,
+.quarto-title-meta-heading,
+.quarto-title .quarto-categories .quarto-category,
+.quarto-float-caption,
+figcaption,
+.column-margin,
+.nav-footer,
+.quarto-listing .listing-date {
+  font-size: var(--publication-small);
+}
+
+.quarto-listing .listing-title {
+  font-size: var(--publication-text);
+  font-weight: 600;
+}
+
+.quarto-listing .listing-description {
+  font-size: var(--publication-text);
+}
+
+body .callout.callout-style-default .callout-body,
+body .callout.callout-style-default .callout-title-container {
+  font-size: var(--publication-text);
+}
+
+body.article-tufte #TOC,
+body.article-tufte #TOC h2 {
+  font-size: var(--publication-text);
+}
+
+body.article-tufte #TOC h2 {
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+}
+
+#TOC ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#TOC ul ul {
+  padding-left: 1.25rem;
+}
+
+/* Keep each article entry on one reading axis. */
+.quarto-listing-default .quarto-post {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quarto-listing-default .quarto-post .body {
+  order: 1;
+  width: 100%;
+  flex-basis: auto;
+}
+
+.quarto-listing-default .quarto-post .metadata {
+  order: 2;
+  width: 100%;
+  flex-basis: auto;
 }

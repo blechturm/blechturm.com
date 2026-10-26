@@ -1,0 +1,15 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = [...document.querySelectorAll("#quarto-header .navbar-nav .nav-link")];
+  const articles = links.find(link => /\/articles\/(?:index\.html)?$/.test(new URL(link.href).pathname));
+  if (!articles) return;
+  const section = new URL(articles.href).pathname.replace(/index\.html$/, "");
+  const page = location.pathname.replace(/index\.html$/, "");
+  if (page !== section.slice(0, -1) && !page.startsWith(section)) return;
+  links.forEach(link => {
+    link.classList.toggle("active", link === articles);
+    link.removeAttribute("aria-current");
+  });
+  articles.setAttribute("aria-current", page === section ? "page" : "location");
+});
+</script>

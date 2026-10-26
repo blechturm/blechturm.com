@@ -1,7 +1,9 @@
 ---
 title: "Why R for quantitative research"
+author: Max Thomasberger
 categories: [R, quant-finance]
 draft: true
+toc: true
 ---
 
 TODO: Discuss the reasons for choosing R for quantitative research.

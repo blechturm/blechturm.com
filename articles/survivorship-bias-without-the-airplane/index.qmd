@@ -1,7 +1,9 @@
 ---
 title: "Survivorship bias without the airplane"
+author: Max Thomasberger
 categories: [statistics, quant-finance]
 draft: true
+toc: true
 ---
 
 TODO: Explain survivorship bias in quantitative research without relying on

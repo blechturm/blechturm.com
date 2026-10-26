@@ -1,7 +1,9 @@
 ---
 title: "crypto2, ledgr, and survivorship"
+author: Max Thomasberger
 categories: [R, ledgr, quant-finance]
 draft: true
+toc: true
 ---
 
 TODO: Explore survivorship considerations in a quantitative research workflow
