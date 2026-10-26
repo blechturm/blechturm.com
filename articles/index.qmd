@@ -13,5 +13,3 @@ listing:
     type: full
     items: 50
 ---
-
-[Subscribe via RSS](index.xml).

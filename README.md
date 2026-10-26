@@ -172,12 +172,14 @@ and an in-article contents list. Navigation and listing pages retain their
 existing layout. Explicitly rerender articles after changing shared R helpers:
 freeze does not track those helper files automatically.
 
-Navigation pages share the site grid and use inline article category links.
+Navigation pages share the site grid and keep category filters in the archive.
 Author and contents metadata belongs to individual articles. The small
 navigation include keeps Articles active on its category and article pages.
 
 The Articles archive uses includes/_articles.ejs.md with Quarto's native
-category filtering. Categories filter the archive in place; category feed
+category filtering. The filter buttons select topics in place; categories
+beside article dates are plain metadata. Title-block category badges are
+disabled, and RSS remains available in the navigation and footer. Category feed
 pages remain available at their existing URLs. The preview contains the three
 planned drafts and four entries labeled "Layout mock". All seven retain
 draft: true and are excluded by the default production render and feeds.

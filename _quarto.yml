@@ -47,6 +47,7 @@ format:
       margin-width: 260px
       sidebar-width: 160px
       gutter-width: 1.5rem
+    title-block-categories: false
     code-copy: true
     code-overflow: wrap
     highlight-style: arrow

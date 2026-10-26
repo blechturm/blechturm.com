@@ -499,8 +499,11 @@ body.article-tufte #TOC h2 {
   font-family: system-ui, sans-serif;
   font-size: var(--publication-small);
 }
-.article-meta .article-category { color: var(--publication-accent); text-decoration: none; }
-.article-meta .article-category:hover { text-decoration: underline; }
+.article-meta > * + .article-category::before {
+  content: "·";
+  margin-right: 0.85rem;
+}
+
 .article-list .listing-description {
   margin: 0.65rem 0 0;
   font-family: Georgia, "Times New Roman", serif;

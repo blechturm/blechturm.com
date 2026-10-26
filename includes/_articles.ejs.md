@@ -16,7 +16,7 @@
       <% } %>
       <% if (item.date) { %><span class="listing-date"><%- item.date %></span><% } %>
       <% for (const category of item.categories || []) { %>
-      <a href="#category=<%- encodeURIComponent(category) %>" class="article-category" data-article-category="<%- btoa(encodeURIComponent(category)) %>"><%- category %></a>
+      <span class="article-category"><%- category %></span>
       <% } %>
     </div>
     <% if (item.description) { %><p class="listing-description"><%= item.description %></p><% } %>

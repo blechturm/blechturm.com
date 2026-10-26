@@ -10,11 +10,5 @@ document.addEventListener("DOMContentLoaded", () => {
     subtree: true, attributes: true, attributeFilter: ["class"]
   });
   syncSelection();
-  document.querySelectorAll("[data-article-category]").forEach(link => {
-    link.addEventListener("click", event => {
-      event.preventDefault();
-      window.quartoListingCategory(link.dataset.articleCategory);
-    });
-  });
 });
 </script>
