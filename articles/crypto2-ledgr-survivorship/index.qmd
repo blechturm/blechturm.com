@@ -1,5 +1,6 @@
 ---
 title: "crypto2, ledgr, and survivorship"
+description: "Planned article: examining survivorship questions with crypto2 and ledgr."
 author: Max Thomasberger
 categories: [R, ledgr, quant-finance]
 draft: true

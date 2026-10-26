@@ -418,14 +418,14 @@ body .callout.callout-style-default .callout-title-container {
   font-size: var(--publication-text);
 }
 
-body.article-tufte #TOC,
-body.article-tufte #TOC h2 {
+body.article-tufte #TOC {
   font-size: var(--publication-text);
 }
 
 body.article-tufte #TOC h2 {
-  font-family: system-ui, sans-serif;
-  font-weight: 600;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--publication-section);
+  font-weight: 400;
 }
 
 #TOC ul {
@@ -453,4 +453,109 @@ body.article-tufte #TOC h2 {
   order: 2;
   width: 100%;
   flex-basis: auto;
+}
+
+/* Article archive: a quiet reading list with native Quarto category filtering. */
+.article-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: 1.5rem 0 0;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid var(--publication-rule);
+}
+.article-filters button {
+  padding: 0.3rem 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--publication-muted);
+  font: inherit;
+  cursor: pointer;
+}
+.article-filters button:hover,
+.article-filters button.active {
+  border-bottom-color: var(--publication-accent);
+  color: var(--publication-accent);
+}
+.article-list .article-entry {
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--publication-rule);
+}
+.article-list .listing-title {
+  margin: 0 0 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--publication-section);
+  font-weight: 400;
+}
+.article-list .listing-title a { color: var(--publication-ink); text-decoration: none; }
+.article-list .listing-title a:hover { color: var(--publication-accent); text-decoration: underline; }
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.85rem;
+  align-items: baseline;
+  color: var(--publication-muted);
+  font-family: system-ui, sans-serif;
+  font-size: var(--publication-small);
+}
+.article-meta .article-category { color: var(--publication-accent); text-decoration: none; }
+.article-meta .article-category:hover { text-decoration: underline; }
+.article-list .listing-description {
+  margin: 0.65rem 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.draft-label { font-style: italic; }
+
+/* Keep native copy controls in their own row, without changing copied source. */
+.code-copy-outer-scaffold {
+  position: relative;
+  padding-top: 2.75rem;
+  background: var(--publication-tint);
+  border: 1px solid var(--publication-rule);
+  border-radius: 0.25rem;
+}
+.code-copy-outer-scaffold::before {
+  content: "Code";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2.75rem;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--publication-rule);
+  color: var(--publication-muted);
+  font-family: system-ui, sans-serif;
+  font-size: var(--publication-small);
+}
+.code-copy-outer-scaffold > .sourceCode { margin-bottom: 0; border: 0; }
+.code-copy-outer-scaffold > .code-copy-button {
+  top: 0.25rem;
+  right: 0.35rem;
+  width: auto;
+  min-width: 4.5rem;
+  height: 2.2rem;
+  padding: 0.25rem 0.6rem;
+  opacity: 1;
+  color: var(--publication-ink);
+  font-family: system-ui, sans-serif;
+  font-size: var(--publication-small);
+}
+.code-copy-button::after { content: "Copy"; margin-left: 0.4rem; }
+.code-copy-button.code-copy-button-checked::after { content: "Copied"; }
+pre.sourceCode { white-space: pre-wrap; overflow-wrap: anywhere; }
+div.sourceCode pre.sourceCode > code { white-space: inherit; overflow-wrap: anywhere; padding: 0; }
+pre.sourceCode code > span { white-space: inherit; overflow-wrap: anywhere; max-width: 100%; }
+/* Quarto measures highlights from the code, not the outer Copy toolbar. */
+pre.code-annotation-code { position: relative; }
+pre.code-annotation-code code > span { max-width: calc(100% - 2rem); }
+#code-annotation-line-highlight { margin-left: 0; width: 100%; }
+.code-annotation-container-grid { margin-top: 0.85rem; }
+.js-plotly-plot .modebar { top: 0.5rem !important; right: 0.5rem !important; }
+.js-plotly-plot .modebar-btn { padding: 0.6rem; }
+
+@media (max-width: 767.98px) {
+  pre.numberSource { margin-left: 0; border-left: 0; padding-left: 0.85rem; }
+  pre.numberSource code > span { left: 0; }
+  pre.numberSource code > span > a:first-child { display: none; }
+  pre.sourceCode { font-size: 0.875rem; }
+  pre.sourceCode > code { font-size: inherit; }
 }

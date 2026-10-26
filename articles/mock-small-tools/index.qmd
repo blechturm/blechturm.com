@@ -1,0 +1,9 @@
+---
+title: "Small tools"
+description: "Layout mock: a compact entry with a single category."
+categories: [software-engineering]
+draft: true
+layout-mock: true
+---
+
+TODO: Layout placeholder only. Replace or remove before publication.

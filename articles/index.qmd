@@ -2,10 +2,10 @@
 title: "Articles"
 listing:
   contents: "*/index.qmd"
-  type: default
+  template: ../includes/_articles.ejs.md
   sort: "date desc"
   categories: false
-  fields: [date, title, description]
+  fields: [date, title, description, categories]
   date-format: iso
   feed:
     title: "blechturm — Articles"
@@ -14,5 +14,4 @@ listing:
     items: 50
 ---
 
-Browse [all articles](index.qmd), [R](r.qmd), [ledgr](ledgr.qmd), or
-[quant finance](quant-finance.qmd). [RSS](index.xml).
+[Subscribe via RSS](index.xml).

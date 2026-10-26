@@ -1,0 +1,9 @@
+---
+title: "From an exploratory R script to a reproducible research notebook"
+description: "Layout mock: this longer summary tests how the listing reads when a technical article needs two or three lines of context. No research content is implied."
+categories: [R, software-engineering]
+draft: true
+layout-mock: true
+---
+
+TODO: Layout placeholder only. Replace or remove before publication.

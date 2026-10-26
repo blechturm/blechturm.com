@@ -1,0 +1,9 @@
+---
+title: "Uncertainty, estimates, and the questions between them"
+description: "Layout mock: space for a future statistical note."
+categories: [statistics, data-science]
+draft: true
+layout-mock: true
+---
+
+TODO: Layout placeholder only. Replace or remove before publication.

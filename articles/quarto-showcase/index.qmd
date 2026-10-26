@@ -22,7 +22,7 @@ format:
     code-summary: "Show R code"
     code-tools: true
     code-line-numbers: true
-    code-annotations: hover
+    code-annotations: below
     citations-hover: true
     footnotes-hover: true
     lightbox: true
@@ -110,19 +110,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula
 porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod.
 Curabitur blandit tempus porttitor.
 
-### Folded code and printed output
+### Folded code and tabular output
 
 The disclosure below contains executable code. The page's **Code** menu can
 show or hide all code and display the article source.
 
 ```{r}
 #| label: printed-output
-round(head(research, 6), 3)
+knitr::kable(head(research, 6), digits = 3)
 ```
 
 ### Annotated code
 
-Hover over the numbered markers to connect each explanation with its line.
+The explanations stay below the code on every screen size. Select a numbered
+explanation to highlight its line; copy the code using the separate toolbar.
 
 ```{r}
 #| label: annotated-example
@@ -166,7 +167,11 @@ A cross-reference such as @sec-computation also follows the section if it moves.
 #| layout-ncol: 2
 #| fig-width: 4
 #| fig-height: 3.5
-par(bg = paper, fg = ink, col.axis = ink, col.lab = ink, mar = c(4, 4, 1, 1))
+par(
+  bg = paper, fg = ink,
+  col.axis = ink, col.lab = ink,
+  mar = c(4, 4, 1, 1)
+)
 hist(research$innovation, breaks = 20, col = "#cba092",
      border = paper, main = "", xlab = "Innovation", ylab = "Count")
 qqnorm(research$innovation, main = "", pch = 16, cex = 0.6, col = copper)
@@ -218,7 +223,9 @@ signal_plot <- ggplot(signals, aes(day, value, colour = series, linetype = serie
 #| fig-alt: "Four synthetic signals A through D, distinguished by copper, teal, plum and ochre colors and different line patterns, on a light background."
 #| fig-width: 8
 #| fig-height: 4.5
-signal_plot + scale_colour_blechturm("light") + theme_blechturm("light")
+signal_plot +
+  scale_colour_blechturm("light") +
+  theme_blechturm("light")
 ```
 
 :::
@@ -230,7 +237,9 @@ signal_plot + scale_colour_blechturm("light") + theme_blechturm("light")
 #| fig-alt: "The same four synthetic signals with lighter copper, teal, plum and ochre colors and different line patterns, on a charcoal background."
 #| fig-width: 8
 #| fig-height: 4.5
-signal_plot + scale_colour_blechturm("dark") + theme_blechturm("dark")
+signal_plot +
+  scale_colour_blechturm("dark") +
+  theme_blechturm("dark")
 ```
 
 :::
@@ -243,7 +252,7 @@ backgrounds, text, and trace colors without recomputing the data.
 
 ```{r}
 #| label: themed-plotly
-#| fig-height: 4.5
+#| fig-height: 6
 p <- plotly::plot_ly()
 series_names <- levels(signals$series)
 line_styles <- c("solid", "dash", "dot", "dashdot")
@@ -416,7 +425,18 @@ Pellentesque ornare sem lacinia quam venenatis vestibulum.
 ```{r}
 #| label: session-information
 #| echo: false
-sessionInfo()
+session <- sessionInfo()
+knitr::kable(data.frame(
+  Component = c("R", "Platform"),
+  Version = c(session$R.version$version.string, session$platform)
+))
+packages <- c("knitr", "rmarkdown", "ggplot2", "DT", "plotly")
+knitr::kable(data.frame(
+  Package = packages,
+  Version = vapply(packages, function(pkg) {
+    as.character(utils::packageVersion(pkg))
+  }, character(1))
+))
 ```
 
 :::

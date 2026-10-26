@@ -1,5 +1,6 @@
 ---
 title: "Survivorship bias without the airplane"
+description: "Planned article: an explanation of survivorship bias beyond the familiar airplane example."
 author: Max Thomasberger
 categories: [statistics, quant-finance]
 draft: true

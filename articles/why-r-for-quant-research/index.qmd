@@ -1,5 +1,6 @@
 ---
 title: "Why R for quantitative research"
+description: "Planned article: reasons for choosing R for quantitative research."
 author: Max Thomasberger
 categories: [R, quant-finance]
 draft: true

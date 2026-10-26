@@ -175,3 +175,16 @@ freeze does not track those helper files automatically.
 Navigation pages share the site grid and use inline article category links.
 Author and contents metadata belongs to individual articles. The small
 navigation include keeps Articles active on its category and article pages.
+
+The Articles archive uses includes/_articles.ejs.md with Quarto's native
+category filtering. Categories filter the archive in place; category feed
+pages remain available at their existing URLs. The preview contains the three
+planned drafts and four entries labeled "Layout mock". All seven retain
+draft: true and are excluded by the default production render and feeds.
+Preview-profile feeds may include drafts; do not deploy that profile.
+
+Typography sizes and colors live in styles.css. Code wraps visually without
+changing the text copied by Quarto's native Copy button. On narrow screens
+the line-number gutter is hidden. The showcase uses code-annotations: below
+so explanations also work with touch. Plotly shows only zoom, pan, and reset,
+with separate toolbar space above and the legend below.

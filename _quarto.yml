@@ -39,13 +39,16 @@ format:
       light: default
       dark: darkly
     css: styles.css
-    include-after-body: includes/navigation.html
+    include-after-body:
+      - includes/navigation.html
+      - includes/article-filters.html
     grid:
       body-width: 720px
       margin-width: 260px
       sidebar-width: 160px
       gutter-width: 1.5rem
     code-copy: true
+    code-overflow: wrap
     highlight-style: arrow
     toc: false
 

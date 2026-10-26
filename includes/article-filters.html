@@ -1,0 +1,20 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const filters = document.querySelector(".article-filters");
+  if (!filters) return;
+  const buttons = [...filters.querySelectorAll("button.category")];
+  const syncSelection = () => buttons.forEach(button => {
+    button.setAttribute("aria-pressed", String(button.classList.contains("active")));
+  });
+  new MutationObserver(syncSelection).observe(filters, {
+    subtree: true, attributes: true, attributeFilter: ["class"]
+  });
+  syncSelection();
+  document.querySelectorAll("[data-article-category]").forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      window.quartoListingCategory(link.dataset.articleCategory);
+    });
+  });
+});
+</script>

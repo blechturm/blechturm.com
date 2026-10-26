@@ -1,0 +1,9 @@
+---
+title: "Reading a backtest"
+description: "Layout mock: a short description to compare with longer article summaries."
+categories: [ledgr, quant-finance]
+draft: true
+layout-mock: true
+---
+
+TODO: Layout placeholder only. Replace or remove before publication.

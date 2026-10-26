@@ -62,12 +62,13 @@ layout_blechturm <- function(mode = c("light", "dark")) {
     font = list(family = "Georgia, Times New Roman, serif", size = 15, color = p$ink),
     xaxis = c(axis, list(showgrid = FALSE)),
     yaxis = c(axis, list(showgrid = TRUE)),
-    legend = list(orientation = "h", x = 0, y = 1.12, bgcolor = p$paper,
+    legend = list(orientation = "h", x = 0, y = -0.22,
+                  xanchor = "left", yanchor = "top", bgcolor = p$paper,
                   font = list(color = p$ink)),
     hoverlabel = list(bgcolor = p$paper, bordercolor = p$muted,
                       font = list(color = p$ink)),
     modebar = list(color = p$muted, activecolor = p$series[[1]]),
-    margin = list(l = 65, r = 20, b = 55, t = 45),
+    margin = list(l = 65, r = 20, b = 110, t = 85),
     hovermode = "x unified"
   )
 }
@@ -78,7 +79,8 @@ plotly_blechturm <- function(plot, mode = c("light", "dark"), adaptive = TRUE) {
   mode <- match.arg(mode)
   plot <- do.call(plotly::layout, c(list(p = plot), layout_blechturm(mode)))
   plot <- plotly::config(plot, displaylogo = FALSE, responsive = TRUE,
-                         modeBarButtonsToRemove = c("lasso2d", "select2d"))
+                         displayModeBar = TRUE, scrollZoom = FALSE,
+                         modeBarButtons = list(c("zoom2d", "pan2d", "resetScale2d")))
   if (!adaptive) return(plot)
   plot <- plotly::plotly_build(plot)
   if (length(plot$x$data) > 4L ||
