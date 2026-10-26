@@ -27,3 +27,328 @@ pre, code {
 main {
   padding-bottom: 3rem;
 }
+
+/* Editorial palette and hierarchy. */
+body.quarto-light {
+  --publication-paper: #faf8f4;
+  --publication-ink: #2d3338;
+  --publication-accent: #913f31;
+  --publication-rule: #d9d3c9;
+  --publication-tint: #f0ece5;
+  --publication-teal: #276a62;
+  --publication-plum: #65519b;
+  --publication-ochre: #8b661a;
+  --publication-accent-rgb: 145, 63, 49;
+}
+
+body.quarto-dark {
+  --publication-paper: #1d2228;
+  --publication-ink: #eee9e0;
+  --publication-accent: #e3a28f;
+  --publication-rule: #424950;
+  --publication-tint: #262d35;
+  --publication-teal: #8ac2b1;
+  --publication-plum: #bda8e0;
+  --publication-ochre: #dfc476;
+  --publication-accent-rgb: 227, 162, 143;
+}
+
+body {
+  background-color: var(--publication-paper);
+}
+
+.navbar {
+  background-color: var(--publication-paper);
+  border-bottom: 1px solid var(--publication-rule);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 5vw, 3.6rem);
+  letter-spacing: -0.04em;
+}
+
+main h2 {
+  margin-top: 2.5rem;
+  letter-spacing: -0.025em;
+}
+
+main p a {
+  color: var(--publication-accent);
+}
+
+/* Match navigation text and controls to the editorial background. */
+body.quarto-light .navbar,
+body.quarto-dark .navbar {
+  --bs-navbar-color: var(--publication-ink);
+  --bs-navbar-hover-color: var(--publication-accent);
+  --bs-navbar-active-color: var(--publication-accent);
+  --bs-navbar-brand-color: var(--publication-ink);
+  --bs-navbar-brand-hover-color: var(--publication-accent);
+  --bs-navbar-toggler-border-color: var(--publication-rule);
+}
+
+/* Quarto embeds fixed colors in these SVG icons. */
+body.quarto-light .navbar .navbar-toggler-icon,
+body.quarto-light .navbar .quarto-color-scheme-toggle .bi::before,
+body.quarto-light .navbar #quarto-search svg {
+  filter: brightness(0);
+}
+
+body.quarto-dark .navbar .navbar-toggler-icon,
+body.quarto-dark .navbar .quarto-color-scheme-toggle .bi::before,
+body.quarto-dark .navbar #quarto-search svg {
+  filter: brightness(0) invert(1);
+}
+
+/* An inset colophon replaces the separate footer strip. */
+body.quarto-light {
+  --publication-muted: #62676b;
+}
+
+body.quarto-dark {
+  --publication-muted: #a6adb6;
+}
+
+footer.footer {
+  background-color: var(--publication-paper);
+  border-top: 0;
+}
+
+footer.footer .nav-footer {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1.25rem 1.5rem 1.5rem;
+  background-color: transparent;
+  border-top: 1px solid var(--publication-rule);
+  color: var(--publication-muted);
+}
+
+footer.footer .nav-footer a {
+  color: var(--publication-muted);
+}
+
+footer.footer .nav-footer a:hover,
+footer.footer .nav-footer a:focus-visible {
+  color: var(--publication-accent);
+}
+
+/* Keep R's client-side tables readable in both Quarto themes. */
+.dataTables_wrapper,
+.dataTables_wrapper table.dataTable,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  color: var(--publication-ink);
+}
+
+.dataTables_wrapper table.dataTable tbody tr {
+  background-color: var(--publication-paper);
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  background-color: var(--publication-paper);
+  color: var(--publication-ink);
+  border-color: var(--publication-rule);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: var(--publication-ink) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: var(--publication-rule);
+  border-color: var(--publication-rule);
+  color: var(--publication-ink) !important;
+}
+
+/* Use the publication palette for Quarto controls as well as prose. */
+body {
+  --bs-link-color: var(--publication-accent);
+  --bs-link-hover-color: var(--publication-accent);
+  --bs-link-color-rgb: var(--publication-accent-rgb);
+  --bs-link-hover-color-rgb: var(--publication-accent-rgb);
+  --bs-primary: var(--publication-accent);
+  --bs-primary-rgb: var(--publication-accent-rgb);
+}
+
+main a,
+.panel-tabset .nav-link {
+  color: var(--publication-accent);
+}
+
+#TOC .nav-link.active,
+#TOC .nav-link:hover {
+  color: var(--publication-accent) !important;
+  border-left-color: var(--publication-accent) !important;
+}
+
+.panel-tabset .nav-tabs {
+  border-bottom-color: var(--publication-rule);
+}
+
+.panel-tabset .nav-link,
+.panel-tabset .nav-link.active {
+  background-color: transparent;
+  color: var(--publication-ink);
+  border-color: transparent;
+}
+
+.panel-tabset .nav-link.active {
+  color: var(--publication-accent);
+  border-bottom: 2px solid var(--publication-accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--publication-accent);
+  outline-offset: 3px;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--publication-accent);
+}
+
+body div.callout.callout-style-default,
+body div.callout.callout-style-simple {
+  background: transparent;
+  color: var(--publication-ink);
+  border: 1px solid var(--publication-rule);
+  border-left: 3px solid var(--publication-accent);
+  border-radius: 0;
+}
+
+body div.callout.callout-warning,
+body div.callout.callout-caution {
+  border-left-color: var(--publication-ochre);
+}
+
+body .callout.callout-style-default > .callout-header {
+  background: var(--publication-tint);
+  color: var(--publication-ink);
+}
+
+body.quarto-light .callout-icon::before {
+  filter: brightness(0);
+}
+
+body.quarto-dark .callout-icon::before {
+  filter: brightness(0) invert(1);
+}
+
+/* Opt-in Tufte-inspired layout; site navigation keeps its own typography. */
+body.article-tufte main h1,
+body.article-tufte main h2,
+body.article-tufte main h3,
+body.article-tufte main h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+body.article-tufte main h1 {
+  font-size: clamp(2.1rem, 4.5vw, 3.1rem);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+body.article-tufte main h2 {
+  font-size: 1.8rem;
+  border-bottom: 0;
+  margin-top: 2.5rem;
+}
+
+body.article-tufte main h3 {
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+body.article-tufte .quarto-title .subtitle {
+  font-style: italic;
+}
+
+body.article-tufte #TOC {
+  margin-block: 1.5rem 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--publication-rule);
+  font-size: 0.9rem;
+}
+
+body.article-tufte .column-margin {
+  color: var(--publication-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+body.article-tufte .header-section-number {
+  color: var(--publication-muted);
+}
+
+body.quarto-light .plot-dark,
+body.quarto-dark .plot-light {
+  display: none;
+}
+
+.palette-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.palette-key span::before {
+  content: "";
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.4em;
+  background: currentColor;
+}
+
+.palette-copper { color: var(--publication-accent); }
+.palette-teal { color: var(--publication-teal); }
+.palette-plum { color: var(--publication-plum); }
+.palette-ochre { color: var(--publication-ochre); }
+
+@media (min-width: 768px) {
+  body.article-tufte #TOC > ul {
+    columns: 2;
+    column-gap: 2rem;
+  }
+}
+
+.palette-key p { display: contents; }
+
+.code-fold > summary,
+.code-tools-button,
+.quarto-title .quarto-categories .quarto-category {
+  color: var(--publication-muted);
+}
+
+.code-fold > summary:hover,
+.code-tools-button:hover {
+  color: var(--publication-accent);
+}
+
+.dropdown-item:active {
+  background-color: var(--publication-accent);
+  color: var(--publication-paper);
+}
+
+body .plotly-notifier .notifier-note {
+  background: var(--publication-tint);
+  color: var(--publication-ink);
+  border: 1px solid var(--publication-rule);
+  box-shadow: none;
+}
+
+body .plotly-notifier .notifier-close {
+  color: var(--publication-ink);
+}

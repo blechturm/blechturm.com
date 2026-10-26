@@ -11,5 +11,6 @@ Thumbs.db
 
 **/*.quarto_ipynb
 
-# Quarto rebuilds its bundled HTML dependency cache.
-/_freeze/site_libs/
+# Quarto rebuilds these bundled libraries; keep frozen R widget dependencies.
+/_freeze/site_libs/clipboard/
+/_freeze/site_libs/quarto-listing/

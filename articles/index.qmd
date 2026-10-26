@@ -15,6 +15,6 @@ listing:
     items: 50
 ---
 
-Articles will appear here as they are published.
+Technical articles and publishing experiments, newest first.
 
 [Subscribe via RSS](index.xml). Category feeds: [R](r.xml), [ledgr](ledgr.xml), [quant-finance](quant-finance.xml).

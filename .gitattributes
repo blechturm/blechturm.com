@@ -4,3 +4,6 @@
 *.css text eol=lf
 *.bib text eol=lf
 *.md text eol=lf
+
+# Frozen widget dependencies retain upstream formatting.
+_freeze/site_libs/** -whitespace

@@ -1,0 +1,426 @@
+---
+title: "Lorem ipsum: a Quarto field notebook"
+subtitle: "An executable R publishing showcase"
+description: "A public design showcase for typography, executable R, figures, citations, and interactive charts."
+date: "2026-10-26"
+categories: [showcase]
+draft: false
+bibliography: references.bib
+number-sections: true
+body-classes: article-tufte
+reference-location: margin
+citation-location: margin
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: body
+    grid:
+      body-width: 720px
+      margin-width: 260px
+      sidebar-width: 160px
+      gutter-width: 1.5rem
+    mermaid:
+      theme: neutral
+    code-fold: true
+    code-summary: "Show R code"
+    code-tools: true
+    code-line-numbers: true
+    code-annotations: hover
+    citations-hover: true
+    footnotes-hover: true
+    lightbox: true
+execute:
+  message: false
+  warning: false
+---
+
+::: {.callout-note}
+## Design showcase
+
+This page is a public design and publishing demonstration for feedback, using
+placeholder prose and entirely synthetic data. It is not a finished research
+article and makes no investment claims. The examples
+execute locally with R, knitr, ggplot2, DT, and Plotly.
+:::
+
+## Prose and structure {#sec-prose}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
+a ante venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non
+metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur.
+
+**Strong emphasis**, *quiet emphasis*, ~~deleted text~~, and `inline code`
+can sit beside ordinary prose. A footnote adds a small aside without breaking
+the paragraph.[^placeholder]
+
+[^placeholder]: Lorem ipsum dolor sit amet. This footnote demonstrates the
+    reading experience; it is not a research reference.
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere
+> consectetur est at lobortis.
+
+A research note
+: A short definition can live directly in the article.
+
+A computational article
+: Prose, source code, and evaluated output travel together.
+
+- Introduce the question.
+- Show enough code to reproduce the calculation.
+- Explain what the outputs mean.
+
+1. Prepare inputs.
+2. Compute a result.
+3. Review the evidence.
+
+### An aside in the margin
+
+::: {.column-margin}
+**Margin note.** Lorem ipsum dolor sit amet. Quarto can place short annotations
+beside the main text on wide screens.
+:::
+
+Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis
+interdum. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus
+magna, vel scelerisque nisl consectetur et.
+
+## Executable R and inline results {#sec-computation}
+
+```{r}
+#| label: setup-demo
+#| include: false
+source("../../R/plot-theme.R")
+set.seed(42)
+n_obs <- 252L
+research <- data.frame(
+  day = seq_len(n_obs),
+  innovation = rnorm(n_obs, mean = 0, sd = 1)
+)
+research$path <- cumsum(research$innovation)
+palette <- blechturm_palette("light")
+copper <- palette$series[["copper"]]
+paper <- palette$paper
+ink <- palette$ink
+```
+
+This paragraph contains evaluated R: the example has
+`r nrow(research)` observations, with a sample mean of
+`r format(mean(research$innovation), digits = 3)`.
+The values are computed from the same data used in @fig-path and @tbl-summary.
+R itself is documented by @R.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula
+porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod.
+Curabitur blandit tempus porttitor.
+
+### Folded code and printed output
+
+The disclosure below contains executable code. The page's **Code** menu can
+show or hide all code and display the article source.
+
+```{r}
+#| label: printed-output
+round(head(research, 6), 3)
+```
+
+### Annotated code
+
+Hover over the numbered markers to connect each explanation with its line.
+
+```{r}
+#| label: annotated-example
+#| code-fold: false
+centered <- research$innovation - mean(research$innovation) # <1>
+round(sd(centered), 3) # <2>
+```
+
+1. Subtract the sample mean from every simulated observation.
+2. Compute the sample standard deviation and print a compact result.
+
+## Figures and cross-references {#sec-figures}
+
+```{r}
+#| label: fig-path
+#| fig-cap: "An accumulated sequence of simulated normal draws."
+#| fig-alt: "A copper line showing the cumulative sum of 252 simulated normal observations."
+#| fig-width: 8
+#| fig-height: 4
+library(ggplot2)
+
+ggplot(research, aes(day, path)) +
+  geom_hline(yintercept = 0, colour = palette$muted, linewidth = 0.4) +
+  geom_line(colour = copper, linewidth = 0.7) +
+  labs(x = "Observation", y = "Cumulative sum") +
+  theme_blechturm("light")
+```
+
+@fig-path is numbered automatically. Click the image to try the lightbox.
+A cross-reference such as @sec-computation also follows the section if it moves.
+
+### Side-by-side figures
+
+```{r}
+#| label: fig-diagnostics
+#| fig-cap: "Two diagnostic views of the synthetic observations."
+#| fig-subcap: ["Distribution", "Normal Q-Q plot"]
+#| fig-alt:
+#|   - "A histogram of simulated normal observations."
+#|   - "A normal quantile plot of the same observations, with a reference line."
+#| layout-ncol: 2
+#| fig-width: 4
+#| fig-height: 3.5
+par(bg = paper, fg = ink, col.axis = ink, col.lab = ink, mar = c(4, 4, 1, 1))
+hist(research$innovation, breaks = 20, col = "#cba092",
+     border = paper, main = "", xlab = "Innovation", ylab = "Count")
+qqnorm(research$innovation, main = "", pch = 16, cex = 0.6, col = copper)
+qqline(research$innovation, col = ink)
+```
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non
+commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+
+## A shared plotting palette {#sec-plot-themes}
+
+Four accents share the publication's warm neutrals. Line styles identify the
+series independently of color. The examples below use invented signals solely
+to demonstrate the layout.
+
+<div class="palette-key">
+<span class="palette-copper">Copper</span>
+<span class="palette-teal">Teal</span>
+<span class="palette-plum">Plum</span>
+<span class="palette-ochre">Ochre</span>
+</div>
+
+### ggplot2: the static figure
+
+This figure switches between two pre-rendered images when you change the
+site's light/dark setting. R runs at render time, never in the browser.
+
+```{r}
+#| label: prepare-themed-signals
+#| include: false
+set.seed(1729)
+signals <- expand.grid(
+  day = seq_len(60),
+  series = factor(c("A", "B", "C", "D"), levels = c("A", "B", "C", "D"))
+)
+signals$value <- (as.integer(signals$series) - 1) * 1.5 +
+  sin(signals$day / 9 + as.integer(signals$series) * 0.4) +
+  rnorm(nrow(signals), sd = 0.08)
+signal_plot <- ggplot(signals, aes(day, value, colour = series, linetype = series)) +
+  geom_line(linewidth = 0.8) +
+  scale_linetype_manual(values = c("solid", "dashed", "dotted", "dotdash")) +
+  labs(x = "Observation", y = "Synthetic signal")
+```
+
+::: {.plot-light}
+
+```{r}
+#| label: themed-ggplot-light
+#| fig-alt: "Four synthetic signals A through D, distinguished by copper, teal, plum and ochre colors and different line patterns, on a light background."
+#| fig-width: 8
+#| fig-height: 4.5
+signal_plot + scale_colour_blechturm("light") + theme_blechturm("light")
+```
+
+:::
+
+::: {.plot-dark}
+
+```{r}
+#| label: themed-ggplot-dark
+#| fig-alt: "The same four synthetic signals with lighter copper, teal, plum and ochre colors and different line patterns, on a charcoal background."
+#| fig-width: 8
+#| fig-height: 4.5
+signal_plot + scale_colour_blechturm("dark") + theme_blechturm("dark")
+```
+
+:::
+
+### Plotly: the interactive companion
+
+Hover to inspect a value, drag to zoom, double-click to reset, or click a
+legend entry to hide a series. The same page theme switch updates chart
+backgrounds, text, and trace colors without recomputing the data.
+
+```{r}
+#| label: themed-plotly
+#| fig-height: 4.5
+p <- plotly::plot_ly()
+series_names <- levels(signals$series)
+line_styles <- c("solid", "dash", "dot", "dashdot")
+for (i in seq_along(series_names)) {
+  rows <- signals$series == series_names[i]
+  p <- plotly::add_trace(
+    p, x = signals$day[rows], y = signals$value[rows],
+    name = series_names[i], type = "scatter", mode = "lines",
+    line = list(color = palette$series[[i]], dash = line_styles[i], width = 2),
+    hovertemplate = "Observation %{x}<br>Signal %{y:.2f}<extra>%{fullData.name}</extra>"
+  )
+}
+p <- plotly::layout(p, xaxis = list(title = "Observation"),
+                    yaxis = list(title = "Synthetic signal"))
+plotly_blechturm(p)
+```
+
+::: {.column-margin}
+**Two renderers, one palette.** The static version remains useful in feeds and
+documents. Plotly provides inspection controls within this static website.
+:::
+
+## Tables, static and interactive {#sec-tables}
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: "Descriptive statistics for the synthetic observations."
+summary_table <- data.frame(
+  Statistic = c("Count", "Mean", "Standard deviation", "Minimum", "Maximum"),
+  Value = c(nrow(research), mean(research$innovation), sd(research$innovation),
+            min(research$innovation), max(research$innovation))
+)
+knitr::kable(summary_table, digits = 3, align = c("l", "r"))
+```
+
+@tbl-summary is a regular HTML table, suitable for copying and reading in RSS.
+
+### An R htmlwidget
+
+This second table runs entirely in the browser after rendering. Try sorting a
+column, searching, or changing pages. It does not need an R server.
+
+```{r}
+#| label: interactive-table
+#| code-fold: true
+DT::datatable(
+  transform(research, innovation = round(innovation, 3), path = round(path, 3)),
+  rownames = FALSE,
+  class = "compact stripe hover",
+  width = "100%",
+  options = list(pageLength = 5, lengthChange = FALSE, scrollX = TRUE)
+)
+```
+
+A static table remains useful when an interactive widget is unavailable in a
+feed reader, PDF, or other non-browser output.
+
+## Mathematics
+
+Inline mathematics, such as $\mu = 0$ and $\sigma = 1$, works within a sentence.
+A displayed equation can have its own label:
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i
+$$ {#eq-mean}
+
+@eq-mean defines the sample mean used in @tbl-summary.
+
+## Tabs and columns
+
+::: {.panel-tabset}
+
+### Interpretation
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus,
+porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante
+venenatis dapibus posuere velit aliquet.
+
+### Method
+
+The inputs are synthetic normal draws with an explicit seed. This tab keeps
+a methodological aside close to the main text.
+
+### Reproduction
+
+Render this article explicitly to rerun its R code:
+
+```bash
+quarto render articles/quarto-showcase/index.qmd
+```
+
+:::
+
+::: {.columns}
+
+::: {.column width="50%"}
+### Lorem
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui.
+Nullam id dolor id nibh ultricies vehicula ut id elit.
+:::
+
+::: {.column width="50%"}
+### Ipsum
+
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+Maecenas sed diam eget risus varius blandit sit amet non magna.
+:::
+
+:::
+
+## Callouts and disclosures
+
+::: {.callout-tip collapse="true"}
+## A collapsible explanation
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. This panel holds
+optional detail while leaving the main reading flow short.
+:::
+
+::: {.callout-important}
+## A methodological assumption
+
+These data are synthetic. A layout demonstration is not evidence about
+a real process.
+:::
+
+::: {.callout-warning}
+## A limitation
+
+This page demonstrates rendering features; it does not validate a model.
+:::
+
+::: {.callout-caution}
+## A reproducibility reminder
+
+Frozen computation does not detect changes to external data or packages.
+Rerun the article explicitly when those inputs change.
+:::
+
+## A native diagram
+
+```{mermaid}
+flowchart LR
+  A["QMD source"] --> B["R execution"]
+  B --> C["Frozen results"]
+  C --> D["HTML article"]
+  D --> E["Article listing and RSS"]
+```
+
+## Citations and bibliography
+
+The citation @R comes from the local R installation's actual citation
+metadata. Bibliography entries live beside this demonstration so the site's
+shared bibliography can remain empty until real articles need it.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam.
+Pellentesque ornare sem lacinia quam venenatis vestibulum.
+
+## Reproducibility appendix
+
+- [x] Set an explicit random seed.
+- [x] Identify synthetic inputs.
+- [x] Keep executable source beside prose.
+- [ ] Replace placeholder text before publishing a real article.
+
+::: {.callout-note collapse="true"}
+## Session information
+
+```{r}
+#| label: session-information
+#| echo: false
+sessionInfo()
+```
+
+:::
