@@ -137,6 +137,9 @@ Quarto references: [listings and feeds](https://quarto.org/docs/websites/website
 
 ## Publishing showcase
 
+The showcase is the style reference for all site articles. See [AGENTS.md](AGENTS.md)
+for the shared presentation and authoring rules.
+
 The public design demonstration at articles/quarto-showcase/index.qmd uses
 lorem ipsum prose and synthetic data. Share its live URL:
 https://blechturm.com/articles/quarto-showcase/.
@@ -162,7 +165,7 @@ Source R/plot-theme.R from an article's setup chunk. It provides
 blechturm_palette(), theme_blechturm(), scale_colour_blechturm(),
 scale_fill_blechturm(), and layout_blechturm(), each with light/dark modes.
 
-The optional plotly_blechturm() wrapper adapts up to four scatter/line traces
+The optional plotly_blechturm() wrapper adapts up to four line, OHLC, candle, or bar traces
 to the page theme in the browser. Use line styles or symbols as well as color.
 The showcase also demonstrates pre-rendered light/dark ggplot2 variants.
 Theme changes never rerun R in the browser.
@@ -190,3 +193,11 @@ changing the text copied by Quarto's native Copy button. On narrow screens
 the line-number gutter is hidden. The showcase uses code-annotations: below
 so explanations also work with touch. Plotly shows only zoom, pan, and reset,
 with separate toolbar space above and the legend below.
+
+The showcase's market-data section uses a committed 60-row extract of ledgr's
+bundled synthetic OHLCV data. R/market-plots.R provides static OHLC bars,
+filled/hollow candles with aligned volume, and an interactive candle/volume
+chart. Source revision, generator, selection, and hashes live in
+articles/quarto-showcase/data/source.json. The companion _README.md describes
+refreshing the extract. No ledgr installation or sibling checkout is needed
+to render these examples.

@@ -1,0 +1,16 @@
+{
+    "source_repository":  "https://github.com/blechturm/ledgr",
+    "source_commit":  "892613f44725299c5a24bb9d1de5205865c84383",
+    "source_package_version":  "0.2.1.0",
+    "source_file":  "data/ledgr_demo_bars.rda",
+    "source_sha256":  "dcf89eeb62b3c037e7880dd0b52c723f4c6711ff579e7ddfc6e8cad1531dded9",
+    "dataset":  "ledgr_demo_bars",
+    "generator":  "ledgr_sim_bars(n_instruments = 10, n_days = 252 * 5, seed = 1701, start = \"2018-01-01\")",
+    "selection":  "DEMO_01; first 60 rows ordered by ts_utc",
+    "rows":  60,
+    "timestamp_timezone":  "UTC",
+    "timestamp_note":  "Synthetic business-day labels at midnight UTC; not exchange session-close times.",
+    "price_basis":  "Synthetic generator prices; no corporate-action adjustment applied.",
+    "export_file":  "ledgr-demo-bars.csv",
+    "export_sha256":  "0da094db4f0ff2a600135e2e50e5fe5a47bd302b9366fbaa496feb5e3bf2a918"
+}

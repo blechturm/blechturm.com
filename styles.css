@@ -37,31 +37,36 @@ main {
 
 /* Editorial palette and hierarchy. */
 body.quarto-light {
-  --publication-paper: #faf8f4;
-  --publication-ink: #2d3338;
-  --publication-accent: #913f31;
-  --publication-rule: #d9d3c9;
-  --publication-tint: #f0ece5;
-  --publication-teal: #276a62;
-  --publication-plum: #65519b;
-  --publication-ochre: #8b661a;
-  --publication-accent-rgb: 145, 63, 49;
+  --publication-paper: #f8f8f8;
+  --publication-ink: #252525;
+  --publication-accent: #336699;
+  --publication-rule: #d8d8d8;
+  --publication-tint: #ededed;
+  --plot-navy: #003366;
+  --publication-heading: var(--publication-ink);
+  --plot-blue: #336699;
+  --plot-orange: #bb431b;
+  --plot-graphite: #666666;
+  --publication-accent-rgb: 51, 102, 153;
 }
 
 body.quarto-dark {
-  --publication-paper: #1d2228;
-  --publication-ink: #eee9e0;
-  --publication-accent: #e3a28f;
-  --publication-rule: #424950;
-  --publication-tint: #262d35;
-  --publication-teal: #8ac2b1;
-  --publication-plum: #bda8e0;
-  --publication-ochre: #dfc476;
-  --publication-accent-rgb: 227, 162, 143;
+  --publication-paper: #1b1b1b;
+  --publication-ink: #ededed;
+  --publication-accent: #6097ce;
+  --publication-rule: #444444;
+  --publication-tint: #252525;
+  --plot-navy: #a5c4e3;
+  --publication-heading: var(--publication-ink);
+  --plot-blue: #6097ce;
+  --plot-orange: #ff6633;
+  --plot-graphite: #b7b7b7;
+  --publication-accent-rgb: 96, 151, 206;
 }
 
 body {
   background-color: var(--publication-paper);
+  color: var(--publication-ink);
 }
 
 .navbar {
@@ -77,6 +82,11 @@ body {
 h1 {
   font-size: var(--publication-title);
   letter-spacing: -0.04em;
+}
+
+main h1,
+main h2 {
+  color: var(--publication-heading);
 }
 
 main h2 {
@@ -99,6 +109,13 @@ body.quarto-dark .navbar {
   --bs-navbar-toggler-border-color: var(--publication-rule);
 }
 
+/* Underlines reinforce the blue active and hover states in navigation. */
+.navbar-nav .nav-link:is(.active, :hover, :focus-visible) {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.3em;
+}
+
 /* Quarto embeds fixed colors in these SVG icons. */
 body.quarto-light .navbar .navbar-toggler-icon,
 body.quarto-light .navbar .quarto-color-scheme-toggle .bi::before,
@@ -114,11 +131,11 @@ body.quarto-dark .navbar #quarto-search svg {
 
 /* An inset colophon replaces the separate footer strip. */
 body.quarto-light {
-  --publication-muted: #62676b;
+  --publication-muted: #666666;
 }
 
 body.quarto-dark {
-  --publication-muted: #a6adb6;
+  --publication-muted: #aaaaaa;
 }
 
 footer.footer {
@@ -234,7 +251,7 @@ body div.callout.callout-style-simple {
 
 body div.callout.callout-warning,
 body div.callout.callout-caution {
-  border-left-color: var(--publication-ochre);
+  border-left-color: var(--plot-orange);
 }
 
 body .callout.callout-style-default > .callout-header {
@@ -319,10 +336,10 @@ body.quarto-dark .plot-light {
   background: currentColor;
 }
 
-.palette-copper { color: var(--publication-accent); }
-.palette-teal { color: var(--publication-teal); }
-.palette-plum { color: var(--publication-plum); }
-.palette-ochre { color: var(--publication-ochre); }
+.palette-navy { color: var(--plot-navy); }
+.palette-blue { color: var(--plot-blue); }
+.palette-orange { color: var(--plot-orange); }
+.palette-graphite { color: var(--plot-graphite); }
 
 @media (min-width: 768px) {
   body.article-tufte #TOC > ul {
@@ -488,7 +505,7 @@ body.article-tufte #TOC h2 {
   font-size: var(--publication-section);
   font-weight: 400;
 }
-.article-list .listing-title a { color: var(--publication-ink); text-decoration: none; }
+.article-list .listing-title a { color: var(--publication-heading); text-decoration: none; }
 .article-list .listing-title a:hover { color: var(--publication-accent); text-decoration: underline; }
 .article-meta {
   display: flex;

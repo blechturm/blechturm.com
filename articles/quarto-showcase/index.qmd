@@ -95,7 +95,7 @@ research <- data.frame(
 )
 research$path <- cumsum(research$innovation)
 palette <- blechturm_palette("light")
-copper <- palette$series[["copper"]]
+plot_accent <- palette$series[[1]]
 paper <- palette$paper
 ink <- palette$ink
 ```
@@ -140,14 +140,14 @@ round(sd(centered), 3) # <2>
 ```{r}
 #| label: fig-path
 #| fig-cap: "An accumulated sequence of simulated normal draws."
-#| fig-alt: "A copper line showing the cumulative sum of 252 simulated normal observations."
+#| fig-alt: "A navy line showing the cumulative sum of 252 simulated normal observations."
 #| fig-width: 8
 #| fig-height: 4
 library(ggplot2)
 
 ggplot(research, aes(day, path)) +
   geom_hline(yintercept = 0, colour = palette$muted, linewidth = 0.4) +
-  geom_line(colour = copper, linewidth = 0.7) +
+  geom_line(colour = plot_accent, linewidth = 0.7) +
   labs(x = "Observation", y = "Cumulative sum") +
   theme_blechturm("light")
 ```
@@ -172,9 +172,9 @@ par(
   col.axis = ink, col.lab = ink,
   mar = c(4, 4, 1, 1)
 )
-hist(research$innovation, breaks = 20, col = "#cba092",
+hist(research$innovation, breaks = 20, col = plot_accent,
      border = paper, main = "", xlab = "Innovation", ylab = "Count")
-qqnorm(research$innovation, main = "", pch = 16, cex = 0.6, col = copper)
+qqnorm(research$innovation, main = "", pch = 16, cex = 0.6, col = plot_accent)
 qqline(research$innovation, col = ink)
 ```
 
@@ -183,15 +183,17 @@ commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
 
 ## A shared plotting palette {#sec-plot-themes}
 
-Four accents share the publication's warm neutrals. Line styles identify the
-series independently of color. The examples below use invented signals solely
-to demonstrate the layout.
+The ledgr logo supplies the navy, blue, orange, and gray color families.
+Orange is darkened for contrast on a light background, while the blues are
+lightened for dark mode. The synthetic signals deliberately overlap;
+line styles and labels identify them independently of color. These examples
+demonstrate the layout, not research findings.
 
 <div class="palette-key">
-<span class="palette-copper">Copper</span>
-<span class="palette-teal">Teal</span>
-<span class="palette-plum">Plum</span>
-<span class="palette-ochre">Ochre</span>
+<span class="palette-navy">Navy</span>
+<span class="palette-blue">Blue</span>
+<span class="palette-orange">Orange</span>
+<span class="palette-graphite">Graphite</span>
 </div>
 
 ### ggplot2: the static figure
@@ -207,8 +209,7 @@ signals <- expand.grid(
   day = seq_len(60),
   series = factor(c("A", "B", "C", "D"), levels = c("A", "B", "C", "D"))
 )
-signals$value <- (as.integer(signals$series) - 1) * 1.5 +
-  sin(signals$day / 9 + as.integer(signals$series) * 0.4) +
+signals$value <- sin(signals$day / 9 + as.integer(signals$series) * 0.4) +
   rnorm(nrow(signals), sd = 0.08)
 signal_plot <- ggplot(signals, aes(day, value, colour = series, linetype = series)) +
   geom_line(linewidth = 0.8) +
@@ -220,7 +221,7 @@ signal_plot <- ggplot(signals, aes(day, value, colour = series, linetype = serie
 
 ```{r}
 #| label: themed-ggplot-light
-#| fig-alt: "Four synthetic signals A through D, distinguished by copper, teal, plum and ochre colors and different line patterns, on a light background."
+#| fig-alt: "Four synthetic signals A through D, distinguished by navy, blue, orange and gray colors and different line patterns, on a light background."
 #| fig-width: 8
 #| fig-height: 4.5
 signal_plot +
@@ -234,11 +235,52 @@ signal_plot +
 
 ```{r}
 #| label: themed-ggplot-dark
-#| fig-alt: "The same four synthetic signals with lighter copper, teal, plum and ochre colors and different line patterns, on a charcoal background."
+#| fig-alt: "The same four synthetic signals with lighter navy, blue, orange and gray colors and different line patterns, on a charcoal background."
 #| fig-width: 8
 #| fig-height: 4.5
 signal_plot +
   scale_colour_blechturm("dark") +
+  theme_blechturm("dark")
+```
+
+:::
+
+### Deliberate emphasis {#sec-plot-focus}
+
+This version deliberately emphasizes **A**, using the same navy accent.
+B, C, and D use graphite and retain their distinct line styles. This treatment
+suits a question about one focal series; the full palette above gives each
+series its own color.
+
+::: {.plot-light}
+
+```{r}
+#| label: focused-ggplot-light
+#| fig-alt: "Four overlapping synthetic signals; A is navy and the three comparison series are gray, with different line styles, on a light background."
+#| fig-width: 8
+#| fig-height: 4.5
+p <- blechturm_palette("light")
+focus_colours <- setNames(rep(p$muted, 4), levels(signals$series))
+focus_colours["A"] <- p$series[[1]]
+signal_plot +
+  scale_colour_manual(values = focus_colours) +
+  theme_blechturm("light")
+```
+
+:::
+
+::: {.plot-dark}
+
+```{r}
+#| label: focused-ggplot-dark
+#| fig-alt: "The same overlapping signals; A is light blue and comparison series are gray, with different line styles, on a charcoal background."
+#| fig-width: 8
+#| fig-height: 4.5
+p <- blechturm_palette("dark")
+focus_colours <- setNames(rep(p$muted, 4), levels(signals$series))
+focus_colours["A"] <- p$series[[1]]
+signal_plot +
+  scale_colour_manual(values = focus_colours) +
   theme_blechturm("dark")
 ```
 
@@ -274,6 +316,143 @@ plotly_blechturm(p)
 **Two renderers, one palette.** The static version remains useful in feeds and
 documents. Plotly provides inspection controls within this static website.
 :::
+
+## Market data from ledgr {#sec-market-data}
+
+These examples use an exported slice of **ledgr_demo_bars**, the bundled
+synthetic OHLCV dataset in the local ledgr repository. The seven source fields
+are `ts_utc`, `instrument_id`, `open`, `high`, `low`, `close`, and `volume`.
+
+```{r}
+#| label: prepare-market-bars
+#| include: false
+source("../../R/market-plots.R")
+market_bars <- read_market_bars("data/ledgr-demo-bars.csv")
+visible_bars <- tail(market_bars, 30)
+```
+
+The extract contains `r nrow(market_bars)` observations for
+`r unique(market_bars$instrument_id)`. The static comparisons show its last
+`r nrow(visible_bars)` rows. Prices and volumes come from the same observations
+in every chart. These are synthetic price units, with no corporate-action
+adjustment applied.
+
+The timestamps retain their UTC values. They are synthetic business-day
+labels at midnight, rather than exchange session-close timestamps. Calendar
+gaps remain visible; no missing bars are filled or assigned zero volume.
+
+[Download the source rows](data/ledgr-demo-bars.csv) or inspect the
+[source revision, generator, and file hashes](data/source.json).
+These are input-data visualizations; they do not describe a strategy's
+performance or execution fills.
+
+**Direction convention:** blue means close is greater than or equal to open;
+orange means close is below open. Equal open and close produce a horizontal
+doji body. Volume uses the same convention.
+
+::: {.panel-tabset}
+
+### OHLC bars
+
+The vertical stem runs from low to high. The left tick marks open; the right
+tick marks close. Volume sits below on the same timestamp axis.
+
+::: {.plot-light}
+
+```{r}
+#| label: market-ohlc-light
+#| fig-alt: "Thirty synthetic DEMO_01 OHLC bars with open ticks on the left and close ticks on the right, blue for up or flat and orange for down; volume is aligned beneath the prices on a light background."
+#| fig-width: 8
+#| fig-height: 6.4
+plot_market_bars(visible_bars, style = "ohlc", mode = "light")
+```
+
+:::
+
+::: {.plot-dark}
+
+```{r}
+#| label: market-ohlc-dark
+#| fig-alt: "The same thirty OHLC observations and aligned volume panel on a dark background."
+#| fig-width: 8
+#| fig-height: 6.4
+plot_market_bars(visible_bars, style = "ohlc", mode = "dark")
+```
+
+:::
+
+### Filled candles
+
+The body spans open to close and the wick spans low to high. Both directions
+use filled bodies here.
+
+::: {.plot-light}
+
+```{r}
+#| label: market-filled-light
+#| fig-alt: "Thirty synthetic DEMO_01 filled candlesticks, blue for close at or above open and orange for close below open, with aligned volume on a light background."
+#| fig-width: 8
+#| fig-height: 6.4
+plot_market_bars(visible_bars, style = "filled", mode = "light")
+```
+
+:::
+
+::: {.plot-dark}
+
+```{r}
+#| label: market-filled-dark
+#| fig-alt: "The same thirty filled candlesticks and volume observations on a dark background."
+#| fig-width: 8
+#| fig-height: 6.4
+plot_market_bars(visible_bars, style = "filled", mode = "dark")
+```
+
+:::
+
+### Hollow candles
+
+Up bodies are hollow with blue outlines; down bodies are filled orange.
+The hollow/filled distinction supplements color.
+
+::: {.plot-light}
+
+```{r}
+#| label: market-hollow-light
+#| fig-alt: "Thirty synthetic DEMO_01 candles with hollow blue up bodies and filled orange down bodies, wicks for high and low, and aligned volume on a light background."
+#| fig-width: 8
+#| fig-height: 6.4
+plot_market_bars(visible_bars, style = "hollow", mode = "light")
+```
+
+:::
+
+::: {.plot-dark}
+
+```{r}
+#| label: market-hollow-dark
+#| fig-alt: "The same hollow and filled candlesticks with aligned volume on a dark background."
+#| fig-width: 8
+#| fig-height: 6.4
+plot_market_bars(visible_bars, style = "hollow", mode = "dark")
+```
+
+:::
+
+:::
+
+### Interactive candles and volume {#sec-market-interactive}
+
+This chart contains all 60 source observations and initially displays the
+last 30. Hover over or tap a candle to inspect its OHLC values and volume.
+Zoom or pan to inspect the earlier observations. The price and volume
+panels share the UTC timestamp axis.
+
+```{r}
+#| label: market-interactive
+#| fig-height: 7.5
+market_candles_widget(market_bars, visible = 30)
+```
 
 ## Tables, static and interactive {#sec-tables}
 
