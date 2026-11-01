@@ -32,11 +32,13 @@ transactions, returns and portfolio analysis. Its backtesting engine,
 `btest`, is written in R, and you can open the source and read the
 simulation loop. [@pmwr-manual; @pmwr-source]
 
-It is also ridiculously fast. vectorbt, the Python framework most people
-would name if you asked for a fast backtester, was faster in my larger
-runs. Speed is one of its selling points, and the version I tested runs on
-a Numba-compiled backend. PMwR still landed in the same general range, and
-on a workload of many small independent backtests it won outright.
+It is also ridiculously fast. It turned out to be one of the fastest backtesting engines I tested,
+and on one workload it was the fastest by a wide margin.
+
+vectorbt, the Python framework most people would name if you asked for a fast backtester,
+was faster in my larger runs. Speed is one of its selling points, and the version I tested runs on a
+Numba-compiled backend. PMwR was still within the same order of magnitude on those larger workloads,
+and on a workload of many small independent backtests it won outright.
 
 ## Why I hadn't taken it seriously
 
@@ -206,8 +208,8 @@ the only option left. [@vectorbt-engines]
 ## Should I have started from PMwR?
 
 This is the uncomfortable part. Knowing what I know now, the economically
-obvious choice might have been to start from PMwR's engine instead of
-writing another backtester from scratch.
+better choice might have been to start from PMwR's engine and explore how
+far it can be extended instead of writing another backtester from scratch.
 
 ledgr exists because I wanted things that matter to my own research:
 point-in-time data handling, explicit decision-time semantics, durable
