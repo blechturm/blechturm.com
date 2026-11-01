@@ -1,0 +1,9 @@
+"engine","required","executed","trade_balance_agreement","decision_only_agreement","classified_residual","not_run"
+"ledgr",36,27,0,0,0,9
+"quantstrat",9,2,2,0,0,7
+"pmwr",16,9,0,9,0,7
+"backtrader",12,5,5,0,0,7
+"bt",9,2,0,2,0,7
+"zipline",9,2,0,0,2,7
+"pybroker",16,8,0,8,0,8
+"vectorbt",9,9,9,0,0,0

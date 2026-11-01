@@ -1,0 +1,105 @@
+{
+  "status": "publication-ready source package; deployment is separate",
+  "publication_scope": "Bounded SMA workload observations accompanying the PMwR article; original report remains preliminary internal-review evidence, not complete-suite acceptance.",
+  "record_id": "20261031-ws5-observed",
+  "measurement_date": "2026-10-31",
+  "repository": "https://github.com/blechturm/ledgr",
+  "accepted_benchmark_commit": "e29407b1f26f6806de9390c9005aaea8e521520c",
+  "commit_available_on_public_remote_as_checked": "no; inspection bundle included locally, publication of Git ref still pending",
+  "product_commit": "891c23c8",
+  "measurement_changes": "none",
+  "report_navigation_changes": {
+    "../../suite/protocol.md": "index.html#methods",
+    "../../records/20261031-regular-scaling-launch-stop/README.md": "index.html#record-history",
+    "../../records/20261031-main-session-import-stop/README.md": "index.html#record-history"
+  },
+  "original_report_sha256": "3f327824788674cc4cebbd55ecde4c1cb1f8501c6b4e979bd9a96f81ce0bd13b",
+  "table_and_image_equality": {
+    "tables": 19,
+    "embedded_images": 1,
+    "identical": true
+  },
+  "hardware": {
+    "observed_utc": "2026-11-01T09:57:16Z",
+    "note": "Hardware inventory captured after the benchmark; CPU/RAM models were not recorded in original timing rows. No benchmark was rerun.",
+    "cpu": "12th Gen Intel(R) Core(TM) i9-12900K",
+    "physical_cores": 16,
+    "logical_processors": 24,
+    "installed_ram_bytes": 68719476736,
+    "os_reported_ram_bytes": 68448108544,
+    "os": "Microsoft Windows 11 Pro",
+    "os_version": "10.0.26200",
+    "os_build": "26200"
+  },
+  "measurement_policy": {
+    "affinity": "0xFFFF (first16 logical processors; declared P-core mask)",
+    "power_plan": "High performance",
+    "external_math_threads": 1,
+    "numba_threads": 1,
+    "duckdb_configured_threads_observed": 16,
+    "background": "observed, not a veto; all retained repetitions visible",
+    "warm": "fresh independent book, experiment setup, indicator calculation and required output materialization on unchanged prepared native input",
+    "cold": "process launch, imports, CSV input, native preparation, first-use work and required output materialization; not empty OS/disk/JIT caches"
+  },
+  "versions": {
+    "R": "4.6.1",
+    "Python": "3.12.13",
+    "PMwR": "1.3-0",
+    "vectorbt": "1.2.0, engine=numba",
+    "ledgr": "frozen891c23c8"
+  },
+  "scope": {
+    "assignments_executed": 64,
+    "assignments_required_in_full_suite": 116,
+    "completed_processes": 235,
+    "promoted_arm_clocks": 470,
+    "operator_unrun_repeats": 7,
+    "N1000_ledgr_repeats": {
+      "durable": 3,
+      "ephemeral": 2,
+      "spot_fifo": 3
+    },
+    "N1000_assigned_peer_repeats": 5
+  },
+  "files": {
+    "comparisons.csv": {
+      "bytes": 9207,
+      "sha256": "aa7500c44391a17ef997d6bbce67837010675bd5385bf3e4e1402970acec7fec"
+    },
+    "coverage.csv": {
+      "bytes": 294,
+      "sha256": "ae48811b945663d990386ae549896c30dc2352d6ea5bd896d7dbc72879165afb"
+    },
+    "financial.csv": {
+      "bytes": 834,
+      "sha256": "7d4987ae077688b6762f64fd98814e847710dd72294cc7ab4521565809f0bfb4"
+    },
+    "independent-review.md": {
+      "bytes": 4128,
+      "sha256": "58589c6a8bd1bbeb7d28582a817cb8268cd771facb7879248245c1123f5ba7cf"
+    },
+    "memory.csv": {
+      "bytes": 195739,
+      "sha256": "34fd7a9aaae501fcf1ebd005a39a84b9a99f0477f5c56025a0981ed8eef4e484"
+    },
+    "pair-comparisons.csv": {
+      "bytes": 587,
+      "sha256": "1597b6a1790ae9d1d29870237ad64cc2bf8e1b185261c1e3edd604453db90808"
+    },
+    "protocol.md": {
+      "bytes": 31889,
+      "sha256": "ce5ccca4b6ab7898decce47d48dbd845b3fa14951005429b7931f52d86b81d25"
+    },
+    "source-and-evidence.zip": {
+      "bytes": 1473506,
+      "sha256": "df4e59f1768501da26f05a233a2ee0756112a49051dfb851bb50f69b61e0fdb7"
+    },
+    "timings.csv": {
+      "bytes": 106955,
+      "sha256": "e352ee145108c7ff53f6566206fa7d3418a5e3d235f49c95874f24085fc7bfe6"
+    }
+  },
+  "adapted_report_sha256": "93e1ac4d893b19ae280a5f858b1d6b027ae59c5c8a17e690a7341e95e6521952",
+  "source_bundle_tracked_files": 133,
+  "source_bundle_line_endings": "Exact Git blob bytes read with git cat-file; no checkout/archive newline conversion."
+}

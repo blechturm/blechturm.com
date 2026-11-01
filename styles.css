@@ -310,6 +310,12 @@ body.article-tufte .column-margin {
   line-height: 1.5;
 }
 
+/* Long source URLs must wrap inside article references and margin notes. */
+body.article-tufte .column-margin a,
+body.article-tufte .csl-entry a {
+  overflow-wrap: anywhere;
+}
+
 body.article-tufte .header-section-number {
   color: var(--publication-muted);
 }

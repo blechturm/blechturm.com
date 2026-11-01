@@ -1,0 +1,137 @@
+---
+title: "Backtesting benchmark: 31 October 2026"
+description: "The report, measurements, recipe source and methods behind the PMwR article."
+author: Max Thomasberger
+date: "2026-10-31"
+draft: false
+body-classes: article-tufte
+toc: false
+---
+
+This is the benchmark package behind
+[The fastest backtester you've never heard of is built in plain R](../../../articles/fastest-backtester-plain-r/index.qmd).
+It uses the accepted October 31 measurement snapshot.
+
+**[Open the full HTML report](report.html)** ·
+[Download the source and evidence bundle](data/source-and-evidence.zip) ·
+[Download every measured clock](data/timings.csv)
+
+## What was measured
+
+A synthetic SMA5/10 crossover rule targets zero or one share per instrument.
+Books begin flat with USD10,000,000; fees and slippage are zero. Signals use
+the current close, with intended fills at the next input bar's open.
+First usable scores seed the rule, unknown signals hold, and final-bar
+changes cannot fill. Native execution differences are classified explicitly.
+
+The article's four rows have five completed repeats per workflow. The
+broader report contains 235 complete processes and 470 cold/warm clocks,
+plus seven repetitions the maintainer chose not to run. In its separate
+N1000 session test, ledgr has three durable, two ephemeral and three spot-FIFO
+repeats; PMwR, vectorbt and PyBroker have five each. The largest stress
+geometry has one descriptive observation per workflow. The report labels
+those counts rather than treating every result as n=5.
+
+The larger peer-suite project remains unfinished. These records support the
+specified SMA workloads and the displayed workflows, rather than a general
+framework ranking or completed release certification. The original report's
+preliminary banner is preserved. Publication shares the bounded measurements
+discussed in the article; it does not change the archived report's original
+internal-review status or certify the complete suite.
+
+## Methods {#methods}
+
+**Warm** starts with unchanged, already prepared native input. A fresh book,
+experiment-specific setup, indicator calculation, execution and the required
+result materialization are timed. Completed books and precomputed indicator
+payloads are not reused. Each native framework owns its fills and accounting.
+
+**Cold** begins at process launch and includes imports, CSV input, reusable
+native preparation, first-use work and the required outputs. It does not
+claim an empty operating-system, disk or persistent JIT cache. Installation
+and common fixture generation are outside both clocks.
+
+The N10/100/1000 session cases execute that many independent experiments
+per arm. They are measured batches, not multiplication-based projections or
+one N-candidate grid. Progress/identity checks are inside the batch clock;
+export, financial verification and explicit between-arm collection are outside.
+
+Durable ledgr and the full-output peers materialize fills, cash, equity and
+asset holdings. Ledgr's reduced-output sweeps retain equity and closed-trade
+P&L and receive no full-output peer ratio. PMwR's native reported journal
+prices are distinct from its cash execution prices. All nine PMwR/vectorbt
+qualification cases agree exactly on cash, equity, holdings, decisions and
+fill keys/quantities; reported prices do not match. This is portfolio-state
+agreement, not an assertion of identical reported fill prices.
+
+| Component | Recorded version or policy |
+| --- | --- |
+| ledgr | Frozen product build `891c23c8`, before the new core |
+| PMwR | 1.3-0 |
+| vectorbt | 1.2.0; Numba explicitly selected for indicators and simulation |
+| R | 4.6.1 |
+| Python | 3.12.13 |
+| CPU | Intel Core i9-12900K, 16 physical cores / 24 logical processors |
+| Installed RAM | 64 GiB |
+| OS | Windows 11 Pro, 64-bit, build 26200 |
+| Host policy | High performance; process-tree affinity `0xFFFF`, first 16 logical processors |
+| External math / Numba threads | 1 |
+| Observed ledgr DuckDB thread setting | 16; not privately overridden |
+
+The CPU/RAM inventory was captured on November 1, after the measurements;
+those model details were not in the original timing rows. The timestamp
+and full values are retained in [source.json](source.json). Background
+activity was observed rather than used as a refusal criterion. The report
+retains timing ranges, actual order and sampled memory; it does not certify
+a contention-free desktop. Memory peaks are sampled process-tree lower
+bounds, with missing short phases shown as missing observations.
+
+PMwR/vectorbt ordinary paired windows alternate first position. Other
+framework observations remain in their original windows. The final ledgr
+and PyBroker session windows are separate, not counterbalanced. Fifteen
+older valid PMwR processes remain unpooled historical evidence.
+
+[Full frozen protocol](data/protocol.md) ·
+[Independent close review](data/independent-review.md)
+
+## Data and source
+
+- [All cold/warm clocks](data/timings.csv)
+- [Sampled phase memory](data/memory.csv)
+- [Native agreement classifications](data/comparisons.csv)
+- [Headline portfolio differences](data/financial.csv)
+- [Exact PMwR/vectorbt paired-state checks](data/pair-comparisons.csv)
+- [Required versus executed suite coverage](data/coverage.csv)
+- [Source, locks, checker and compact evidence ZIP](data/source-and-evidence.zip)
+- [Artifact provenance and integrity values](source.json)
+
+The ZIP is an inspection bundle from the accepted ledgr benchmark commit
+`e29407b1f26f6806de9390c9005aaea8e521520c`. It includes our native recipes,
+dependency locks, runner/checker, compact records, independent review and the
+original audited HTML. It does not include installed third-party libraries
+or the large raw native captures. Regeneration requires the pinned ledgr
+product and documented native environments. Rendering this website reads
+only the files in this repository and never runs a backtest.
+
+The source project is [blechturm/ledgr](https://github.com/blechturm/ledgr).
+At draft preparation, the accepted benchmark commit was unavailable on the
+public remote. The download supplies the exact source/evidence snapshot
+without relying on that Git reference.
+The served report differs from the original only in three navigation links
+pointing to this page. Its 19 tables and embedded plot are unchanged.
+
+## Record history {#record-history}
+
+Earlier stopped or withdrawn windows remain in the benchmark's record
+history. A Python cold-result retention defect caused one window to be
+withdrawn before corrected measurement. Later unattributed losses of files
+from TEMP environments stopped imports or launches. The same exact dependency
+pins were restored outside TEMP and native outputs requalified.
+
+All 31 completed observations from the interrupted scaling window and three
+completed R session observations were retained with original metadata; only
+missing cases were run. Failures were not converted into performance clocks,
+and no completed observation was selected by speed. The final seven unrun
+repetitions are the explicit maintainer curtailment, not framework failures
+or resource-censor claims. The report preserves its excluded historical
+windows and separately retained older PMwR clocks.

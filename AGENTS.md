@@ -43,7 +43,8 @@ into a real article.
 ## Authoring and verification
 
 - Articles live at articles/<slug>/index.qmd. Start unfinished work with
-  draft: true. The original planned stubs and layout mocks remain drafts.
+  draft: true. The authoring showcase remains a draft; planned stubs and
+  layout mocks have been removed.
 - Read README.md for prerequisites and operations. Use quarto preview for
   writing; quarto preview --profile preview --render all also shows drafts.
   Never deploy the preview profile.

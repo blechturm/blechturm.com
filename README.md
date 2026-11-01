@@ -140,11 +140,9 @@ Quarto references: [listings and feeds](https://quarto.org/docs/websites/website
 The showcase is the style reference for all site articles. See [AGENTS.md](AGENTS.md)
 for the shared presentation and authoring rules.
 
-The public design demonstration at articles/quarto-showcase/index.qmd uses
-lorem ipsum prose and synthetic data. Share its live URL:
-https://blechturm.com/articles/quarto-showcase/.
-It uses only the showcase category, keeping it out of the R syndication feed.
-Preview it at
+The authoring demonstration at articles/quarto-showcase/index.qmd uses
+lorem ipsum prose and synthetic data. It retains `draft: true` and is excluded
+from production listings, search, sitemap, and feeds. Preview it at
 http://localhost:4200/articles/quarto-showcase/ using the explicit draft-preview profile:
 
 ~~~bash
@@ -183,9 +181,9 @@ The Articles archive uses includes/_articles.ejs.md with Quarto's native
 category filtering. The filter buttons select topics in place; categories
 beside article dates are plain metadata. Title-block category badges are
 disabled, and RSS remains available in the navigation and footer. Category feed
-pages remain available at their existing URLs. The preview contains the three
-planned drafts and four entries labeled "Layout mock". All seven retain
-draft: true and are excluded by the default production render and feeds.
+pages remain available at their existing URLs. The original three planned
+stubs and four layout mocks have been removed. The showcase is retained as
+a draft authoring reference.
 Preview-profile feeds may include drafts; do not deploy that profile.
 
 Typography sizes and colors live in styles.css. Code wraps visually without
@@ -201,3 +199,17 @@ chart. Source revision, generator, selection, and hashes live in
 articles/quarto-showcase/data/source.json. The companion _README.md describes
 refreshing the extract. No ledgr installation or sibling checkout is needed
 to render these examples.
+
+## PMwR article and benchmark artifacts
+
+The first publication is
+[articles/fastest-backtester-plain-r/index.qmd](articles/fastest-backtester-plain-r/index.qmd).
+Its [dated benchmark package](benchmarks/backtesting/2026-10-31/index.qmd)
+contains the accepted report, measured CSVs, methods/hardware, and a ZIP of
+the exact recipe source, locks, compact evidence and independent review.
+Both pages are enabled for production rendering. The article shares bounded
+SMA workload observations; the archived report preserves its preliminary
+internal-review status and does not certify the complete peer suite. See the
+package's [_README](benchmarks/backtesting/2026-10-31/_README.md) for rendering
+and verification. Rendering uses this checkout's copied evidence and frozen
+article output; it never requires a sibling ledgr checkout or a benchmark run.

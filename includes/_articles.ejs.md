@@ -12,7 +12,7 @@
     <h2 class="listing-title"><a href="<%- item.path %>"><%= item.title %></a></h2>
     <div class="article-meta">
       <% if (item.draft) { %>
-      <span class="draft-label"><%= item['layout-mock'] ? 'Layout mock · Draft' : 'Draft' %></span>
+      <span class="draft-label">Draft</span>
       <% } %>
       <% if (item.date) { %><span class="listing-date"><%- item.date %></span><% } %>
       <% for (const category of item.categories || []) { %>

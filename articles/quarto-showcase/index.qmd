@@ -2,10 +2,10 @@
 title: "Lorem ipsum: a Quarto field notebook"
 author: Max Thomasberger
 subtitle: "An executable R publishing showcase"
-description: "A public design showcase for typography, executable R, figures, citations, and interactive charts."
+description: "An authoring reference for typography, executable R, figures, citations, and interactive charts."
 date: "2026-10-26"
 categories: [showcase]
-draft: false
+draft: true
 bibliography: references.bib
 number-sections: true
 body-classes: article-tufte
@@ -34,7 +34,7 @@ execute:
 ::: {.callout-note}
 ## Design showcase
 
-This page is a public design and publishing demonstration for feedback, using
+This page is a local design and publishing reference, using
 placeholder prose and entirely synthetic data. It is not a finished research
 article and makes no investment claims. The examples
 execute locally with R, knitr, ggplot2, DT, and Plotly.

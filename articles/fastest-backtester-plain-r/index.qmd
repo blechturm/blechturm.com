@@ -1,0 +1,237 @@
+---
+title: "The fastest backtester you've never heard of is built in plain R"
+description: "A benchmark of my own R framework led me to PMwR, an unassuming backtester that competes with vectorbt on these workloads."
+author: Max Thomasberger
+date: "2026-11-01"
+categories: [R, ledgr, quant-finance]
+draft: false
+bibliography: references.bib
+number-sections: true
+body-classes: article-tufte
+reference-location: margin
+citation-location: margin
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: body
+    citations-hover: true
+    footnotes-hover: true
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+I'm building a backtesting framework in R called ledgr. Naturally, I wanted
+to know how it compares with other frameworks, so I measured it. That is how
+I ended up being thoroughly humbled by Enrico Schumann's PMwR.
+
+PMwR stands for Portfolio Management with R. It covers backtesting,
+transactions, returns and portfolio analysis. Its backtesting engine,
+`btest`, is written in R, and you can open the source and read the
+simulation loop. [@pmwr-manual; @pmwr-source]
+
+It is also ridiculously fast. vectorbt, the Python framework most people
+would name if you asked for a fast backtester, was faster in my larger
+runs. Speed is one of its selling points, and the version I tested runs on
+a Numba-compiled backend. PMwR still landed in the same general range, and
+on a workload of many small independent backtests it won outright.
+
+## Why I hadn't taken it seriously
+
+I knew PMwR existed. My reasons for not taking it seriously don't
+hold up very well now.
+
+I'm used to software that announces its ambitions. vectorbt puts
+"Blazing fast" and "the speed of C" on its front page. Performance is
+central to its pitch, and my measurements give me no reason to object.
+[@vectorbt]
+
+PMwR describes itself as providing "reliable, efficient and convenient
+tools." Having now measured it, "efficient" reads like academic
+understatement. Competitive with vectorbt on these workloads is
+considerably more than I would have inferred from that description.
+[@pmwr-home]
+
+That difference in presentation affected my judgment. I read the quiet
+homepage and moved on. I had become accustomed to software marketing,
+and academic understatement barely registered. That was a poor way to
+judge the engineering. PMwR has public source repositories, a README and
+extensive documentation; I simply hadn't given it a fair look.
+[@pmwr-readme]
+
+PMwR doesn't need a different personality. But I would have put those
+timings on the front page.
+
+## The benchmark
+
+The data are synthetic, and the strategy is deliberately boring: a five-
+and ten-period moving-average crossover rule, targeting either zero or one
+share per instrument.
+
+@tbl-warm-comparison reports warm timings from the October 31 baseline in
+seconds, each the median of five completed repeats. The fastest time in
+each row is in bold.
+
+```{r}
+#| label: tbl-warm-comparison
+#| tbl-cap: "Warm elapsed seconds; median of five completed repeats per workflow."
+clocks <- read.csv("../../benchmarks/backtesting/2026-10-31/data/timings.csv")
+shapes <- c("10x7200", "1166x252", "20x23400", "12x90_N100")
+engines <- c("pmwr", "vectorbt", "ledgr")
+selected <- subset(clocks, arm == "warm" & workflow == "durable" &
+                     shape %in% shapes & engine %in% engines)
+counts <- with(selected, table(shape, engine))
+stopifnot(nrow(counts) == 4L, ncol(counts) == 3L, all(counts == 5L))
+medians <- aggregate(clock_sec ~ shape + engine, selected, median)
+labels <- c("10 instruments &times; 7,200 bars",
+            "1,166 instruments &times; 252 bars",
+            "20 instruments &times; 23,400 bars",
+            "100 independent runs, each 12 instruments &times; 90 bars")
+rows <- lapply(seq_along(shapes), function(i) {
+  values <- vapply(engines, function(engine) {
+    medians$clock_sec[medians$shape == shapes[i] & medians$engine == engine]
+  }, numeric(1))
+  cells <- formatC(values, format = "f", digits = 2)
+  cells[values == min(values)] <- paste0("**", cells[values == min(values)], "**")
+  c(labels[i], cells)
+})
+knitr::kable(do.call(rbind, rows),
+             col.names = c("Workload", "PMwR", "vectorbt", "ledgr, durable"),
+             align = c("l", "r", "r", "r"), escape = FALSE)
+```
+
+The last row is 100 separate backtests rather than a parameter grid packed
+into one vectorized call. One large simulation and many small ones stress
+different parts of a framework. vectorbt handles the first case very well,
+and PMwR turned out to be surprisingly strong at the second. Parameter-grid
+throughput is a separate question.
+
+PMwR and vectorbt matched exactly on portfolio state across all nine
+qualification cases; their reported transaction prices differed.
+
+<details id="benchmark-methodology">
+<summary>Benchmark methodology</summary>
+
+**Strategy and input.** Every portfolio starts flat with $10 million in
+cash, with zero fees and slippage. Signals use the current close, and the
+intended execution is the next bar's open. The first usable moving-average
+pair seeds the rule; trading requires a later transition. Unknown signals
+hold existing positions, and final-bar changes have no following bar on
+which to fill. The data are synthetic and only there to exercise the
+machinery.
+
+**Warm clock.** Every experiment starts from already prepared native input,
+creates a fresh book, recalculates indicators and materializes the required
+results. Imports, CSV loading, reusable preparation and first-use
+compilation are outside the warm clock. Experiment-specific setup remains
+inside it.
+
+**Versions and measurement date.** These measurements use PMwR 1.3-0, vectorbt 1.2.0 with its Numba engine
+explicitly selected, and a frozen ledgr build, `891c23c8`. They describe the
+October 31 baseline, before the new core discussed below.
+
+**Scope.** This article shares the measured SMA workloads from an unfinished
+peer-suite project. The archived report retains its original internal-review
+and preliminary status. These observations do not establish a general
+framework ranking or acceptance of the complete suite.
+
+**Equivalence checks.** Timing comparisons are only useful if the frameworks do approximately the
+same thing. My qualification checks covered nine cases, including every
+workload in the table and a separate 500-instrument, 1,260-bar run. Cash,
+equity, holdings and strategy decisions matched exactly between PMwR and
+vectorbt in all nine cases. Reported transaction prices did not: the pinned
+PMwR recipe writes closing prices to its journal while the wealth
+calculation uses the open. The report keeps that discrepancy explicit, so
+the claim I'm comfortable making is agreement on portfolio state.
+
+</details>
+
+The [full benchmark report](../../benchmarks/backtesting/2026-10-31/report.html)
+includes cold timings, spread, other frameworks and memory observations.
+[Methods, versions, hardware, downloadable data and the source bundle](../../benchmarks/backtesting/2026-10-31/index.qmd)
+are available alongside it.
+
+## ledgr's numbers
+
+Yes, ledgr is in the table, and its measured durable workflows took roughly
+40 to 110 times as long as the PMwR workflows on these workloads. These are
+elapsed times for the completed workflows, including their different
+persistence obligations.
+
+Some of that gap is intentional. ledgr preserves a durable execution and
+accounting history and reconstructs results from that history. The two
+frameworks aren't trying to preserve the same amount of information.
+I doubt that explains a 40- to 110-fold difference, though.
+
+Profiling points to plenty of waste: list-based state, repeated copying,
+repeated instrument lookups, per-step serialization, context construction,
+and reconstructing accounting after the engine has finished. None of that
+is the price of R; it's the price of how I wrote it.
+
+## How plain R gets this fast
+
+Reading PMwR's source gives some clues. Prices and portfolio histories live
+in matrices, and cash and wealth are preallocated vectors. The simulation
+steps through time with an ordinary R loop, while operations across
+instruments use vector arithmetic. [@pmwr-source]
+
+A loop over 20,000 time steps can be cheap if each iteration touches a few
+preallocated vectors and matrix columns. The same loop gets expensive if
+every step allocates lists, resolves names, copies objects, validates
+structures and rebuilds state. What makes a backtester slow is what
+happens inside the loop.
+
+I can't tell from the source how much each design choice contributes. But
+it gave me better questions to ask about my own code: how often am I
+copying state, resolving names that could have been resolved once,
+repeating work inside the hot loop, or re-validating something that was
+already established? Those questions have been more useful than wondering
+whether to rewrite everything in C++.
+
+"Plain R" needs a qualification, of course. R's vector operations call
+compiled native code, and R itself is not somehow executing on pure
+thoughts and goodwill. My R recipes also use TTR for the moving averages;
+its rolling calculations call compiled routines. It is PMwR's simulation
+and accounting code that I'm describing as plain R. [@ttr-source]
+
+The usual answer to "how do I make this fast" these days is a rewrite
+in Rust or C++. vectorbt itself offers an optional Rust backend for
+supported operations; these measurements use Numba. PMwR reaches these
+timings without a PMwR-specific compiled simulation engine, which moved my
+estimate of how fast an R backtester can get before compiled code becomes
+the only option left. [@vectorbt-engines]
+
+## Should I have started from PMwR?
+
+This is the uncomfortable part. Knowing what I know now, the economically
+obvious choice might have been to start from PMwR's engine instead of
+writing another backtester from scratch.
+
+ledgr exists because I wanted things that matter to my own research:
+point-in-time data handling, explicit decision-time semantics, durable
+experiment state, execution and accounting that can explain what
+happened, and reproducible research objects that can be reopened later.
+None of those obviously requires a slow simulation core. Some of them
+certainly cost time, and some of PMwR's speed may come from doing less work
+per step.
+
+How much of ledgr's gap is the unavoidable price of those features and how
+much is bad architecture, I don't know yet, but I can measure it. If I
+remove the avoidable work and ledgr is still far behind, the uncomfortable
+conclusion is also the useful one: I should probably have started from
+PMwR.
+
+## What's next
+
+I'm currently working on ledgr v0.2.3. Most of the performance work comes
+down to doing less: fewer allocations, fewer repeated lookups, more compact
+typed state, and cheaper reconstruction after simulation. Some of that was
+already planned, and PMwR gave me a much less comfortable target. I'll rerun
+the same benchmark against the new core and publish the result, including
+the numbers that make ledgr look bad.
+
+In the meantime, if you want a fast backtester in R, it already exists.
+Enrico Schumann built it, and it deserves far more attention than its
+homepage asks for.
